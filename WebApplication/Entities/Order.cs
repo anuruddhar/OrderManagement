@@ -1,0 +1,32 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Linq;
+using System.Threading.Tasks;
+
+namespace WebApplication.Entities {
+    public class Order {
+
+        public int Id { get; set; }
+        public DateTime OrderDate { get; set; }
+        public string OrderNumber { get; set; }
+        public RecordStatus RecordStatus { get; set; }
+        public IEnumerable<OrderItem> Items { get; set; }
+
+
+        public void Load(IDataReader dataReader) {
+            if (dataReader.Read()) {
+                Id = Int32.Parse(dataReader["ID"].ToString());
+                OrderDate = Convert.ToDateTime(dataReader["ORDER_DATE"]);
+                OrderNumber = dataReader["ORDER_NUMBER"].ToString();
+                dataReader.NextResult();
+                while (dataReader.Read()) {
+                    OrderItem orderItem = new OrderItem();
+                    orderItem.Id =  Int32.Parse(dataReader["ID"].ToString());
+                    orderItem.Quantity = Int32.Parse(dataReader["QUANTITY"].ToString());
+                    orderItem.UnitPrice = Decimal.Parse(dataReader["UNITPRICE"].ToString());
+                }
+            }
+        }
+    }
+}

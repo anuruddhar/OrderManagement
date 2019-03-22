@@ -10,6 +10,24 @@ using WebApplication.Entities;
 namespace WebApplication.Data {
     public class Repository : IRepository {
 
+
+        public async Task<IEnumerable<Order>> GetOrders() {
+            List<Order> list = new List<Order>();
+            using (SqlConnection connection = await Database.GetSqlConnection()) {
+                using (SqlCommand command = connection.CreateCommand()) {
+                    command.CommandText = "dbo.Ssp_Order_GetOrders";
+                    command.CommandType = CommandType.StoredProcedure;
+                    IDataReader dataReader = await command.ExecuteReaderAsync(CommandBehavior.CloseConnection);
+                    while (dataReader.Read()) {
+                        Order order = new Order();
+                        order.Load(dataReader);
+                        list.Add(order);
+                    }
+                }
+            }
+            return list;
+        }
+
         public async Task<Order> GetOrder(int orderId) {
             Order data = new Order();
             using (SqlConnection connection = await Database.GetSqlConnection()) {
@@ -23,7 +41,9 @@ namespace WebApplication.Data {
                     };
                     command.Parameters.Add(sqlParameter);
                     IDataReader dataReader = await command.ExecuteReaderAsync(CommandBehavior.CloseConnection);
-                    data.Load(dataReader);
+                    if (dataReader.Read()) {
+                        data.Load(dataReader);
+                    }
                 }
             }
             return data;

@@ -15,18 +15,16 @@ namespace WebApplication.Entities {
 
 
         public void Load(IDataReader dataReader) {
-            if (dataReader.Read()) {
-                Id = Int32.Parse(dataReader["ID"].ToString());
-                OrderDate = Convert.ToDateTime(dataReader["ORDER_DATE"]);
-                OrderNumber = dataReader["ORDER_NUMBER"].ToString();
-                dataReader.NextResult();
-                while (dataReader.Read()) {
-                    OrderItem orderItem = new OrderItem();
-                    orderItem.Id =  Int32.Parse(dataReader["ID"].ToString());
-                    orderItem.Quantity = Int32.Parse(dataReader["QUANTITY"].ToString());
-                    orderItem.UnitPrice = Decimal.Parse(dataReader["UNITPRICE"].ToString());
-                }
-            }
+            Id = Int32.Parse(dataReader["ID"].ToString());
+            OrderDate = Convert.ToDateTime(dataReader["ORDER_DATE"]);
+            OrderNumber = dataReader["ORDER_NUMBER"].ToString();
+            /*dataReader.NextResult();
+            while (dataReader.Read()) {
+                OrderItem orderItem = new OrderItem();
+                orderItem.Id = Int32.Parse(dataReader["ID"].ToString());
+                orderItem.Quantity = Int32.Parse(dataReader["QUANTITY"].ToString());
+                orderItem.UnitPrice = Decimal.Parse(dataReader["UNITPRICE"].ToString());
+            }*/
         }
     }
 }

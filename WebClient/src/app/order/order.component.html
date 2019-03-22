@@ -1,0 +1,17 @@
+<p>
+  order works!
+</p>
+<table>
+  <thead>
+    <th>Id</th>
+    <th>OrderDate</th>
+    <th>OrderNumber</th>
+  </thead>
+  <tbody *ngFor="let item of orders">
+    <tr>
+      <td>{{ item.Id }}</td>
+      <td>{{ item.OrderDate }}</td>
+      <td>{{ item.OrderNumber }}</td>
+    </tr>
+  </tbody>
+</table>

@@ -36,6 +36,16 @@ namespace WebApplication.Controllers {
             return Ok(data);
         }
 
+        [HttpGet()]
+        public async Task<IActionResult> Get() {
+            var data = await _repository.GetOrders();
+            if (data == null) {
+                return NotFound();
+            }
+            return Ok(data);
+        }
+
+
         [HttpPost]
         public async Task<IActionResult> Save([FromBody]Order order) {
             if(order == null) {

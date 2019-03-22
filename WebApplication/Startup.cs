@@ -20,11 +20,19 @@ namespace WebApplication {
         }
 
         public IConfiguration Configuration { get; }
+        readonly string AllowAllOrigins = "AllowAllOrigins ";
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services) {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2)
                  .AddJsonOptions(options => options.SerializerSettings.ContractResolver = new DefaultContractResolver()); ;
+
+            services.AddCors(options => {
+                options.AddPolicy(AllowAllOrigins,
+                    builder => {
+                        builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod();
+                    });
+            });
 
             services.AddScoped<IRepository, Repository>();
         }
@@ -38,8 +46,10 @@ namespace WebApplication {
                 app.UseHsts();
             }
 
+            app.UseCors(AllowAllOrigins);
             app.UseHttpsRedirection();
             app.UseMvc();
+
 
         }
     }

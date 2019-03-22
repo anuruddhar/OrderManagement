@@ -3,10 +3,33 @@
 -- Create date: <Create Date,,>
 -- Description:	<Description,,>
 -- =============================================
+CREATE PROCEDURE dbo.Ssp_Order_GetOrders
+AS
+BEGIN TRY
+	SET NOCOUNT ON;
+
+    SELECT 
+		 ID
+		,ORDER_DATE
+		,ORDER_NUMBER
+	FROM
+		[dbo].[ORDER]
+END TRY
+BEGIN CATCH  
+	THROW 
+END CATCH
+GO
+
+
+-- =============================================
+-- Author:		<Author,,Name>
+-- Create date: <Create Date,,>
+-- Description:	<Description,,>
+-- =============================================
 CREATE PROCEDURE dbo.Ssp_Order_GetOrderByID
 	@iOrderId INT
 AS
-BEGIN
+BEGIN TRY
 	SET NOCOUNT ON;
 
     SELECT 
@@ -17,7 +40,11 @@ BEGIN
 		[dbo].[ORDER]
 	WHERE
 		ID = @iOrderId
-END
+END TRY
+BEGIN CATCH  
+	THROW 
+END CATCH
+
 GO
 
 
@@ -29,7 +56,7 @@ GO
 CREATE PROCEDURE dbo.Ssp_Order_SaveOrder
 	@vJson NVARCHAR(MAX)
 AS
-BEGIN
+BEGIN TRY
 
 	MERGE [dbo].[ORDER] AS TARGET
 	USING(
@@ -64,5 +91,8 @@ BEGIN
 		,ORDER_NUMBER = SOURCE.OrderNumber
 	WHEN MATCHED AND SOURCE.RecordStatus = 3 THEN
 		DELETE;
-END
+END TRY
+BEGIN CATCH
+	THROW 
+END CATCH
 GO

@@ -11,7 +11,7 @@ namespace WebApplication.Entities {
         public DateTime OrderDate { get; set; }
         public string OrderNumber { get; set; }
         public RecordStatus RecordStatus { get; set; }
-        public IEnumerable<OrderItem> Items { get; set; }
+        public List<OrderItem> Items { get; set; } = new List<OrderItem>();
 
 
         public void Load(IDataReader dataReader) {

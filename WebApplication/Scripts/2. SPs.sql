@@ -26,6 +26,7 @@ GO
 -- Create date: <Create Date,,>
 -- Description:	<Description,,>
 -- =============================================
+-- DROP PROCEDURE dbo.Ssp_Order_GetOrderByID
 CREATE PROCEDURE dbo.Ssp_Order_GetOrderByID
 	@iOrderId INT
 AS
@@ -40,6 +41,17 @@ BEGIN TRY
 		[dbo].[ORDER]
 	WHERE
 		ID = @iOrderId
+
+    SELECT 
+		 [ID]
+		,[ORDER_ID]
+		,[PRODUCT_ID]
+		,[QUANTITY]
+		,[UNIT_PRICE]
+	FROM
+		[dbo].[ORDER_ITEM]
+	WHERE
+		ORDER_ID = @iOrderId
 END TRY
 BEGIN CATCH  
 	THROW 

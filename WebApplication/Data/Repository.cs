@@ -44,6 +44,12 @@ namespace WebApplication.Data {
                     if (dataReader.Read()) {
                         data.Load(dataReader);
                     }
+                    dataReader.NextResult();
+                    while (dataReader.Read()) {
+                        OrderItem orderItem = new OrderItem();
+                        orderItem.Load(dataReader);
+                        data.Items.Add(orderItem);
+                    }
                 }
             }
             return data;

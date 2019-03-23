@@ -108,3 +108,28 @@ BEGIN CATCH
 	THROW 
 END CATCH
 GO
+
+-- =============================================
+-- Author:		<Author,,Name>
+-- Create date: <Create Date,,>
+-- Description:	<Description,,>
+-- =============================================
+
+CREATE PROCEDURE dbo.Ssp_Product_GetProducts
+AS 
+BEGIN TRY
+	SET NOCOUNT ON;
+	SELECT
+		 [ID]
+		,[NAME]
+		,[CATEGORY]
+		,[PRICE] 
+		,[RATING]
+	FROM 
+		[dbo].[PRODUCT]
+
+END TRY
+BEGIN CATCH
+	THROW
+END CATCH
+GO

@@ -73,5 +73,22 @@ namespace WebApplication.Data {
             return val;
         }
 
+        public async Task<IEnumerable<Product>> GetProducts() {
+            List<Product> list = new List<Product>();
+            using (SqlConnection connection = await Database.GetSqlConnection()) {
+                using (SqlCommand command = connection.CreateCommand()) {
+                    command.CommandText = "dbo.Ssp_Product_GetProducts";
+                    command.CommandType = CommandType.StoredProcedure;
+                    IDataReader dataReader = await command.ExecuteReaderAsync();
+                    while (dataReader.Read()) {
+                        Product product = new Product();
+                        product.Load(dataReader);
+                        list.Add(product);
+                    }
+                }
+            }
+            return list;
+        }
+
     }
 }

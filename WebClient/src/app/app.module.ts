@@ -8,7 +8,10 @@ import { HomeComponent } from './home/home.component';
 import { OrderComponent } from './order/order.component';
 import { AppRoutingModule } from './app-routing.module';
 import { OrderListComponent } from './order/order-list.component';
-import { SpaceToHypenPipe } from './space-to-hypen.pipe';
+import { SpaceToHypenPipe } from './shared/space-to-hypen.pipe';
+import { ProductComponent } from './product/product.component';
+import { ProductListComponent } from './product/product-list.component';
+import { RatingComponent } from './shared/rating/rating.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +19,10 @@ import { SpaceToHypenPipe } from './space-to-hypen.pipe';
     HomeComponent,
     OrderComponent,
     OrderListComponent,
-    SpaceToHypenPipe
+    SpaceToHypenPipe,
+    ProductComponent,
+    ProductListComponent,
+    RatingComponent
   ],
   imports: [
     BrowserModule,

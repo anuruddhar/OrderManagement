@@ -48,11 +48,9 @@ namespace WebApplication.Controllers {
 
         [HttpPost]
         public async Task<IActionResult> Save([FromBody]Order order) {
-            if (!ModelState.IsValid) {
-                return BadRequest("");
-            }
+            if (!ModelState.IsValid) return BadRequest(ModelState);
 
-            if(order == null) {
+            if (order == null) {
                 return BadRequest();
             }
 

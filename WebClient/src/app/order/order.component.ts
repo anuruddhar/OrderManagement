@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { Order } from '../Model/order';
+import { Component , OnInit } from '@angular/core';
+import {  ActivatedRoute } from '@angular/router';
+
 import { DataserviceService } from '../dataservice.service';
+import { Order } from '../Model/order';
 
 @Component({
   selector: 'app-order',
@@ -9,17 +11,14 @@ import { DataserviceService } from '../dataservice.service';
 })
 export class OrderComponent implements OnInit {
 
-  orders: Order[];
-  constructor(private service: DataserviceService) { }
+  order : Order;
+  constructor(  private route: ActivatedRoute,
+    private service: DataserviceService) { }
 
   ngOnInit() {
-    this.getOrders();
+    const id = +this.route.snapshot.params['id'];
+    this.service.getOrder(id).subscribe(data=>this.order = data);
   }
 
-  getOrders(): void {
-    this.service.getOrders().subscribe(
-      list => { this.orders = list; }
-    );
-  }
 
 }

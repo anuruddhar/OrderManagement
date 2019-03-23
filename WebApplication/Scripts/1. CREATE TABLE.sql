@@ -1,5 +1,5 @@
 
-select * from [dbo].[ORDER]
+--select * from [dbo].[ORDER]
 CREATE TABLE [dbo].[ORDER](
 	[ID] [int] IDENTITY(1,1) NOT NULL,
 	[ORDER_DATE] [datetime] NOT NULL,

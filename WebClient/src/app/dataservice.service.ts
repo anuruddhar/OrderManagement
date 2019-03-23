@@ -15,4 +15,8 @@ export class DataserviceService {
     return this.http.get<Order[]>(this.orderUrl);
   }
 
+  public getOrder(orederId: number) : Observable<Order>{
+    return this.http.get(this.orderUrl+"/"+orederId);
+  }
+
 }

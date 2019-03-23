@@ -1,17 +1,10 @@
-<p>
-  order works!
-</p>
-<table>
-  <thead>
-    <th>Id</th>
-    <th>OrderDate</th>
-    <th>OrderNumber</th>
-  </thead>
-  <tbody *ngFor="let item of orders">
-    <tr>
-      <td>{{ item.Id }}</td>
-      <td>{{ item.OrderDate }}</td>
-      <td>{{ item.OrderNumber }}</td>
-    </tr>
-  </tbody>
-</table>
+<div *ngIf="order">
+  <h2>{{order.OrderNumber | uppercase}} </h2>
+  <div><span>id: </span>{{order.Id}}</div>
+  <div>
+    <label>order:
+      <input [(ngModel)]="order.OrderNumber" placeholder="name"/>
+    </label>
+  </div>
+  <button (click)="goBack()">go back</button>
+</div>

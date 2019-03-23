@@ -2,12 +2,13 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { OrderComponent } from './order/order.component';
-import { HttpClientModule } from '@angular/common/http';
+import { OrderListComponent } from './order/order-list.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: 'home', component: HomeComponent },
-  { path: 'order', component: OrderComponent }
+  { path: 'orders', component: OrderListComponent },
+  { path: 'order/:id', component: OrderComponent }
 ];
 
 @NgModule({

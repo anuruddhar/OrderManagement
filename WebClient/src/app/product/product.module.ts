@@ -1,26 +1,19 @@
-// import { NgModule } from '@angular/core';
-// import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
 
-// import { ProductComponent } from './product.component';
-// import { ProductListComponent } from './product-list.component';
-// import { RatingComponent } from '../shared/rating/rating.component';
-// import { ProductRoutingModule } from './product-routing.module';
-// import { RouterModule } from '@angular/router';
+import { ProductComponent } from './product.component';
+import { ProductListComponent } from './product-list.component';
+import { ProductRoutingModule } from './product-routing.module';
+import { RouterModule } from '@angular/router';
+import { SharedModule } from '../shared/shared.module';
 
-// @NgModule({
-//   imports: [
-//     CommonModule,
-//     //ProductRoutingModule,
-//     RouterModule.forChild([
-//       { path: 'products', component: ProductListComponent },
-//       { path: '', redirectTo: 'home', pathMatch: 'full' },
-//       { path: '**', redirectTo: 'home', pathMatch: 'full' }
-//     ])
-//   ],
-//   declarations: [
-//     ProductComponent,
-//     ProductListComponent,
-//     RatingComponent
-//   ]
-// })
-// export class ProductModule { }
+@NgModule({
+  imports: [
+    SharedModule,
+    ProductRoutingModule
+  ],
+  declarations: [
+    ProductComponent,
+    ProductListComponent
+  ]
+})
+export class ProductModule { }

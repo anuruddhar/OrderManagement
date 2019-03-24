@@ -1,19 +1,15 @@
-import { BrowserModule } from '@angular/platform-browser';
+
 import { NgModule } from '@angular/core';
-import { HttpClientModule } from '@angular/common/http';
-import { FormsModule } from '@angular/forms';
-import { CommonModule } from '@angular/common';
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { OrderComponent } from './order/order.component';
 import { AppRoutingModule } from './app-routing.module';
 import { OrderListComponent } from './order/order-list.component';
-import { SpaceToHypenPipe } from './shared/space-to-hypen.pipe';
-import { ProductListComponent } from './product/product-list.component';
+import { SharedModule } from './shared/shared.module';
+import { ProductModule } from './product/product.module';
 import { ProductComponent } from './product/product.component';
-import { RatingComponent } from './shared/rating/rating.component';
-
+import { ProductListComponent } from './product/product-list.component';
 
 @NgModule({
   declarations: [
@@ -21,17 +17,13 @@ import { RatingComponent } from './shared/rating/rating.component';
     HomeComponent,
     OrderComponent,
     OrderListComponent,
-    SpaceToHypenPipe,
     ProductComponent,
-    ProductListComponent,
-    RatingComponent
+    ProductListComponent
   ],
   imports: [
-    BrowserModule,
-    CommonModule,
-    HttpClientModule,
-    FormsModule,
-    AppRoutingModule
+    SharedModule,
+    //ProductModule,
+    AppRoutingModule, // Note: Route should be last in the list
   ],
   providers: [],
   bootstrap: [AppComponent]

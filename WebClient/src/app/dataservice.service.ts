@@ -28,7 +28,10 @@ export class DataserviceService {
     return this.http.get<Order>(this.orderUrl+"/"+orederId);
   }
   public saveOrder(order:Order){
-    return this.http.post(this.orderUrl,order,this.httpOptions);
+    return this.http.post<Order>(this.orderUrl, order);
+    // return this.http.post<Order>(this.orderUrl,JSON.stringify(order),this.httpOptions).pipe(
+    //   catchError(this.handleError)
+    // );
   }
 
   private productUrl = 'http://localhost:64374/api/product';

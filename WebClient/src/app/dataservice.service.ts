@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { Observable, throwError } from 'rxjs';
+import { tap,catchError } from 'rxjs/operators';
 import { Order } from './Model/order';
 import { Product } from './Model/product';
 
@@ -22,7 +23,16 @@ export class DataserviceService {
 
   private productUrl = 'http://localhost:64374/api/product';
   public getProducts(): Observable<Product[]>{
-    return this.http.get<Product[]>(this.productUrl);
+    return this.http.get<Product[]>(this.productUrl).pipe(
+      tap(data=>console.log('Product:'+ JSON.stringify(data))),
+      catchError(this.handleError)
+    );
+  }
+
+  private handleError(error: HttpErrorResponse){
+    let errorMessage = error.status + " : " + error.message;
+    console.error(errorMessage);
+    return throwError(errorMessage);
   }
 
 }

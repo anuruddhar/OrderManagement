@@ -11,6 +11,7 @@ export class ProductListComponent implements OnInit {
 
   products: Product[];
   ratingMessage: string;
+  errorMessage: string;
   constructor(private dataserviceService: DataserviceService) { }
 
   ngOnInit() {
@@ -18,13 +19,14 @@ export class ProductListComponent implements OnInit {
   }
 
   getProducts(): void {
-    this.dataserviceService.getProducts().subscribe(p => {
-      this.products = p;
-    });
+    this.dataserviceService.getProducts().subscribe(
+      p => { this.products = p },
+      error => this.errorMessage = error
+    );
   }
 
   onRatingClicked(message: string): void {
-    this.ratingMessage = "- "+ message;
+    this.ratingMessage = "- " + message;
   }
 
 

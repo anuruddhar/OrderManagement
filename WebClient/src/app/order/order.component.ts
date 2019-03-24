@@ -20,5 +20,12 @@ export class OrderComponent implements OnInit {
     this.service.getOrder(id).subscribe(data=>this.order = data);
   }
 
+  Save(){
+    this.service.saveOrder(this.order);
+  }
+
+  GoBack(){
+
+  }
 
 }

@@ -9,9 +9,9 @@ namespace WebApplication.Entities {
     public class Order {
 
         public int Id { get; set; }
-        [Required(ErrorMessage = "OrderDate is Required")]
+        //[Required(ErrorMessage = "OrderDate is Required")]
         public DateTime OrderDate { get; set; }
-        [Required(ErrorMessage = "OrderNumber is Required"), MaxLength(10)]
+        //[Required(ErrorMessage = "OrderNumber is Required"), MaxLength(10)]
         public string OrderNumber { get; set; }
         public RecordStatus RecordStatus { get; set; }
         public List<OrderItem> Items { get; set; } = new List<OrderItem>();

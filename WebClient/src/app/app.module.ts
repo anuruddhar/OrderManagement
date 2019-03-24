@@ -8,8 +8,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { OrderListComponent } from './order/order-list.component';
 import { SharedModule } from './shared/shared.module';
 import { ProductModule } from './product/product.module';
-import { ProductComponent } from './product/product.component';
-import { ProductListComponent } from './product/product-list.component';
 
 @NgModule({
   declarations: [
@@ -17,12 +15,10 @@ import { ProductListComponent } from './product/product-list.component';
     HomeComponent,
     OrderComponent,
     OrderListComponent,
-    ProductComponent,
-    ProductListComponent
   ],
   imports: [
     SharedModule,
-    //ProductModule,
+    ProductModule,
     AppRoutingModule, // Note: Route should be last in the list
   ],
   providers: [],

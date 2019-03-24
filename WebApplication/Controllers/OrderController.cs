@@ -36,7 +36,7 @@ namespace WebApplication.Controllers {
             return Ok(data);
         }
 
-        [HttpGet()]
+        [HttpGet]
         public async Task<IActionResult> Get() {
             var data = await _repository.GetOrders();
             if (data == null) {
@@ -48,7 +48,7 @@ namespace WebApplication.Controllers {
 
         [HttpPost]
         public async Task<IActionResult> Save([FromBody]Order order) {
-            if (!ModelState.IsValid) return BadRequest(ModelState);
+            //if (!ModelState.IsValid) return BadRequest(ModelState);
 
             if (order == null) {
                 return BadRequest();

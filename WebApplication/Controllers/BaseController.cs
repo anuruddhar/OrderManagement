@@ -14,7 +14,7 @@ namespace WebApplication.Controllers {
 
         public BaseController(IConfiguration configuration) {
             _configuration = configuration;
-            Database.ConfigCS = configuration.GetConnectionString("Connection");
+            // Database.ConfigCS = configuration.GetConnectionString("Connection");
         }
     }
 }

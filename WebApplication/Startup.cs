@@ -17,6 +17,7 @@ namespace WebApplication {
     public class Startup {
         public Startup(IConfiguration configuration) {
             Configuration = configuration;
+            Database.ConfigCS = Configuration.GetConnectionString("Connection");
         }
 
         public IConfiguration Configuration { get; }
@@ -49,6 +50,15 @@ namespace WebApplication {
             app.UseCors(AllowAllOrigins);
             app.UseHttpsRedirection();
             app.UseMvc();
+
+            // https://stackoverflow.com/questions/53906866/neterr-invalid-http-response-error-after-post-request-with-angular-7
+            app.Use(async (ctx, next) =>
+            {
+                await next();
+                if (ctx.Response.StatusCode == 204) {
+                    ctx.Response.ContentLength = 0;
+                }
+            });
 
 
         }

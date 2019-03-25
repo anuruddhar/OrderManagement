@@ -32,38 +32,40 @@ export class DataserviceService {
   public saveOrder(order: Order) {
     // return this.http.post<Order>(this.orderUrl, order);
     return this.http.post<Order>(this.orderUrl, order, this.httpOptions)
-    .pipe(
-      catchError(this.handleError)
-    );
+      .pipe(
+        tap(data => console.log(JSON.stringify(data))),
+        catchError(this.handleError)
+      );
   }
 
   public getProducts(): Observable<Product[]> {
-    return this.http.get<Product[]>(this.productUrl).pipe(
+    return this.http.get<Product[]>(this.productUrl)
+    .pipe(
       tap(data => console.log('Product:' + JSON.stringify(data))),
       catchError(this.handleError)
     );
   }
 
-  // private handleError(error: HttpErrorResponse) {
-  //   const errorMessage = error.status + ' : ' + error.message;
-  //   console.error(errorMessage);
-  //   return throwError(errorMessage);
-  // }
-
   private handleError(error: HttpErrorResponse) {
-    if (error.error instanceof ErrorEvent) {
-      // A client-side or network error occurred. Handle it accordingly.
-      console.error('An error occurred:', error.error.message);
-    } else {
-      // The backend returned an unsuccessful response code.
-      // The response body may contain clues as to what went wrong,
-      console.error(
-        `Backend returned code ${error.status}, ` +
-        `body was: ${error.error}`);
-    }
-    // return an observable with a user-facing error message
-    return throwError(
-      'Something bad happened; please try again later.');
-  };
+    const errorMessage = error.status + ' : ' + error.message;
+    console.error(errorMessage);
+    return throwError(errorMessage);
+  }
+
+  // private handleError(error: HttpErrorResponse) {
+  //   if (error.error instanceof ErrorEvent) {
+  //     // A client-side or network error occurred. Handle it accordingly.
+  //     console.error('An error occurred:', error.error.message);
+  //   } else {
+  //     // The backend returned an unsuccessful response code.
+  //     // The response body may contain clues as to what went wrong,
+  //     console.error(
+  //       `Backend returned code ${error.status}, ` +
+  //       `body was: ${error.error}`);
+  //   }
+  //   // return an observable with a user-facing error message
+  //   return throwError(
+  //     'Something bad happened; please try again later.');
+  // }
 
 }

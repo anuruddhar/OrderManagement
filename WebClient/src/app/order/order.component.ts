@@ -1,5 +1,5 @@
-import { Component , OnInit } from '@angular/core';
-import {  ActivatedRoute } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 import { DataserviceService } from '../dataservice.service';
 import { Order } from '../Model/order';
@@ -11,20 +11,21 @@ import { Order } from '../Model/order';
 })
 export class OrderComponent implements OnInit {
 
-  order : Order;
-  constructor(  private route: ActivatedRoute,
+  order: Order;
+  constructor(private route: ActivatedRoute,
     private service: DataserviceService) { }
 
   ngOnInit() {
     const id = +this.route.snapshot.params['id'];
-    this.service.getOrder(id).subscribe(data=>this.order = data);
+    this.service.getOrder(id).subscribe(data => this.order = data);
   }
 
-  Save(){
-    this.service.saveOrder(this.order);
+  Save() {
+    this.order.RecordStatus = 2;
+    this.service.saveOrder(this.order).subscribe();
   }
 
-  GoBack(){
+  GoBack() {
 
   }
 
